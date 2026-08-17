@@ -6,7 +6,8 @@
 const DataStore = (function() {
   'use strict';
 
-  const STORAGE_KEY = 'ck_store_data';
+  const API_URL = '/api/data';
+const ADMIN_TOKEN_KEY = 'ck_admin_password';
   let data = null;
 
   const DEFAULT_HERO = {
@@ -107,44 +108,76 @@ const DataStore = (function() {
   }
 
   // ==== تحميل البيانات ====
-  async function load() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        data = mergeDefaults(JSON.parse(stored));
-        return data;
-      } catch (e) {
-        console.warn('فشل قراءة localStorage:', e);
-        localStorage.removeItem(STORAGE_KEY);
-      }
+ async function load() {
+  try {
+    const res = await fetch(API_URL, {
+      method: 'GET',
+      cache: 'no-store'
+    });
+
+    if (!res.ok) {
+      throw new Error('فشل تحميل البيانات: ' + res.status);
     }
+
+    const json = await res.json();
+    data = mergeDefaults(json);
+    return data;
+
+  } catch (e) {
+    console.error('فشل تحميل بيانات المتجر:', e);
+
     try {
-      const paths = ['data/store.json', '../data/store.json', './data/store.json'];
-      for (const path of paths) {
-        try {
-          const res = await fetch(path, { cache: 'no-store' });
-          if (res.ok) {
-            const json = await res.json();
-            data = mergeDefaults(json);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            return data;
-          }
-        } catch (e) { /* جرب المسار التالي */ }
+      const res = await fetch('../data/store.json', {
+        cache: 'no-store'
+      });
+
+      if (res.ok) {
+        data = mergeDefaults(await res.json());
+        return data;
       }
-      throw new Error('لم يتم العثور على store.json');
-    } catch (e) {
-      console.error('فشل تحميل بيانات المتجر:', e);
-      data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-      return data;
-    }
+    } catch (_) {}
+
+    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    return data;
+  }
+}
+
+  async function save() {
+  if (!data) return false;
+
+  const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+
+  // الزائر العادي لا يملك صلاحية الحفظ
+  if (!token) {
+    window.dispatchEvent(new CustomEvent('ck-data-changed'));
+    return false;
   }
 
-  function save() {
-    if (!data) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    // فعّل حدث تخصيصي للاستماع للتغييرات
+  try {
+    const res = await fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.error || 'تعذر حفظ البيانات');
+    }
+
     window.dispatchEvent(new CustomEvent('ck-data-changed'));
+
+    return true;
+
+  } catch (e) {
+    console.error('فشل حفظ بيانات المتجر:', e);
+    return false;
   }
+}
 
   function get() { return data; }
   function getSettings() { return data ? data.settings : null; }
@@ -353,9 +386,8 @@ const DataStore = (function() {
     }
   }
   function resetToDefault() {
-    localStorage.removeItem(STORAGE_KEY);
-    data = null;
-  }
+  data = null;
+}
 
   // ==== كلمة المرور ====
   function checkPassword(pw) {
@@ -371,7 +403,10 @@ const DataStore = (function() {
   // ==== جلسة الأدمن ====
   function isAdminLoggedIn() { return localStorage.getItem('ck_admin_session') === '1'; }
   function loginAdmin() { localStorage.setItem('ck_admin_session', '1'); }
-  function logoutAdmin() { localStorage.removeItem('ck_admin_session'); }
+  function logoutAdmin() {
+  localStorage.removeItem('ck_admin_session');
+  sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+}
 
   return {
     load, save, get,
