@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المنتجات · لوحة التحكم CampusKart</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-body">
+  <div class="admin-mask" id="adminMask"></div>
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <img src="../assets/logo.svg" alt="CampusKart">
+      <div>
+        <div class="b-name" data-brand-name>CampusKart</div>
+        <div class="b-sub">لوحة التحكم</div>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>الرئيسية</a>
+      <a href="hero.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>اللوحة العلوية</a>
+      <a href="categories.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>الأقسام</a>
+      <a href="products.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>المنتجات</a>
+      <a href="rates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>أسعار الصرف</a>
+      <a href="message.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>رسالة واتساب</a>
+      <a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>الإعدادات</a>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <button class="btn" data-theme-toggle></button>
+      <a class="btn" href="../index.html">🛍️</a>
+      <button class="btn btn-danger" id="logoutBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" style="margin-bottom:12px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="admin-topbar">
+      <h1>إدارة المنتجات</h1>
+      <div class="actions">
+        <select class="btn" id="filterCat"><option value="all">كل الأقسام</option></select>
+        <input type="text" id="searchProd" placeholder="بحث..." style="padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);font-family:inherit;color:var(--ink)">
+        <button class="btn btn-primary" id="addProdBtn">+ إضافة منتج</button>
+        <button class="btn" data-download-json>📥 تنزيل JSON</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <p class="panel-desc">أدخل سعر كل منتج <b>بالدولار (USD)</b> فقط. حدّد الحالة (متوفر / كمية محدودة / غير متوفر). أزرار الأسهم لتغيير ترتيب المنتجات، والعين لإخفائها.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:80px">ترتيب</th>
+              <th style="width:60px">صورة</th>
+              <th>الاسم</th>
+              <th>القسم</th>
+              <th>الحالة</th>
+              <th>USD</th>
+              <th>TRY</th>
+              <th>SYP</th>
+              <th style="text-align:left">إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="prodsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-mask" id="prodModal">
+  <div class="modal" style="max-width:640px">
+    <h3 id="prodModalTitle">إضافة منتج</h3>
+    <div class="form-field">
+      <label for="fProdName">اسم المنتج *</label>
+      <input type="text" id="fProdName" placeholder="مثال: شيبس ليز بالجبنة">
+    </div>
+    <div class="form-field">
+      <label for="fProdDesc">وصف المنتج (اختياري)</label>
+      <textarea id="fProdDesc" rows="2" placeholder="وصف قصير للمنتج يظهر تحت اسمه في الموقع..."></textarea>
+    </div>
+    <div class="form-row-2">
+      <div class="form-field">
+        <label for="fProdCat">القسم *</label>
+        <select id="fProdCat"></select>
+      </div>
+      <div class="form-field">
+        <label for="fProdPrice">السعر بالدولار (USD) *</label>
+        <input type="number" step="0.01" min="0" id="fProdPrice" placeholder="0.50">
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-field">
+        <label for="fProdStatus">حالة المنتج *</label>
+        <select id="fProdStatus">
+          <option value="available">متوفر</option>
+          <option value="limited">كمية محدودة</option>
+          <option value="unavailable">غير متوفر</option>
+        </select>
+      </div>
+      <div class="form-field" id="stockField" style="display:none">
+        <label for="fProdStock">الكمية المتاحة *</label>
+        <input type="number" step="1" min="0" id="fProdStock" placeholder="مثال: 5">
+        <small>الحد الأقصى الذي يستطيع الزبون شراءه</small>
+      </div>
+    </div>
+    <div class="form-field">
+      <label>صورة المنتج (اختياري)</label>
+      <div id="fProdImg"></div>
+    </div>
+    <div class="form-field">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="fProdVisible" checked>
+        <span>عرض المنتج في الموقع</span>
+      </label>
+      <small>ألغِ التحديد لإخفاء المنتج بدون حذفه</small>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>إلغاء</button>
+      <button class="btn btn-primary" id="saveProdBtn">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data-store.js"></script>
+<script src="../js/currency.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/image-upload.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+(async function() {
+  const ok = await Admin.init();
+  if (!ok) return;
+  const { $, $$, escapeHtml, toast } = UI;
+
+  let editingId = null;
+  let imgUploader = null;
+  const state = { catFilter: 'all', search: '' };
+
+  const STATUS_LABEL = {
+    available: '<span style="color:var(--success);font-weight:700">✓ متوفر</span>',
+    limited: '<span style="color:var(--warning);font-weight:700">⚡ محدود</span>',
+    unavailable: '<span style="color:var(--danger);font-weight:700">✕ غير متوفر</span>'
+  };
+
+  function refreshCatOptions() {
+    const cats = DataStore.getCategories(true); // كل الأقسام حتى المخفية
+    const filter = $('#filterCat');
+    filter.innerHTML = '<option value="all">كل الأقسام</option>' +
+      cats.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.icon || '')} ${escapeHtml(c.name)}</option>`).join('');
+    filter.value = state.catFilter;
+
+    const modalSel = $('#fProdCat');
+    modalSel.innerHTML = cats.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.icon || '')} ${escapeHtml(c.name)}</option>`).join('');
+  }
+
+  function render() {
+    let list = DataStore.getProducts(true); // مع المخفية
+    if (state.catFilter !== 'all') list = list.filter(p => p.category === state.catFilter);
+    if (state.search) {
+      const q = state.search.toLowerCase();
+      list = list.filter(p => p.name.toLowerCase().includes(q));
+    }
+
+    const rows = list.map((p, idx) => {
+      const cat = DataStore.getCategory(p.category);
+      const icon = (cat && cat.icon) || '📦';
+      const catName = cat ? cat.name : '—';
+      const isFirst = idx === 0;
+      const isLast = idx === list.length - 1;
+      const statusHtml = STATUS_LABEL[p.status] || STATUS_LABEL.available;
+      const stockNote = p.status === 'limited' ? ` <small style="color:var(--muted)">(${p.stock})</small>` : '';
+      const rowOpacity = p.visible === false ? 'opacity:0.5' : '';
+      return `
+        <tr style="${rowOpacity}">
+          <td>
+            <div style="display:flex;gap:2px">
+              <button class="icon-action" data-move-up="${escapeHtml(p.id)}" ${isFirst ? 'disabled' : ''} title="أعلى">↑</button>
+              <button class="icon-action" data-move-down="${escapeHtml(p.id)}" ${isLast ? 'disabled' : ''} title="أسفل">↓</button>
+            </div>
+          </td>
+          <td>
+            <div style="width:44px;height:44px;background:var(--bg);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid var(--border);overflow:hidden">
+              ${p.image ? `<img src="${escapeHtml(p.image)}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='${escapeHtml(icon)}'">` : escapeHtml(icon)}
+            </div>
+          </td>
+          <td>
+            <div><b>${escapeHtml(p.name)}</b></div>
+            ${p.description ? `<div style="font-size:11px;color:var(--muted);margin-top:2px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(p.description)}</div>` : ''}
+          </td>
+          <td><span class="cat-badge">${escapeHtml(icon)} ${escapeHtml(catName)}</span></td>
+          <td>${statusHtml}${stockNote}</td>
+          <td class="price-cell">$${Currency.format(p.priceUSD, 'USD')}</td>
+          <td class="price-cell sec">${Currency.priceWith(p.priceUSD, 'TRY')}</td>
+          <td class="price-cell sec">${Currency.priceWith(p.priceUSD, 'SYP')}</td>
+          <td>
+            <div class="tbl-actions">
+              <button class="icon-action" data-toggle-vis="${escapeHtml(p.id)}" title="${p.visible ? 'إخفاء' : 'إظهار'}">
+                ${p.visible
+                  ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+                  : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+                }
+              </button>
+              <button class="icon-action" data-edit="${escapeHtml(p.id)}" title="تعديل">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+              <button class="icon-action danger" data-del="${escapeHtml(p.id)}" title="حذف">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+    $('#prodsTbody').innerHTML = rows || `<tr><td colspan="9" class="empty-state">لا توجد منتجات مطابقة.</td></tr>`;
+
+    $$('[data-edit]').forEach(b => b.addEventListener('click', () => openModal(b.dataset.edit)));
+    $$('[data-del]').forEach(b => b.addEventListener('click', () => deleteProduct(b.dataset.del)));
+    $$('[data-toggle-vis]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.toggleVis;
+      const p = DataStore.getProduct(id);
+      if (!p) return;
+      DataStore.updateProduct(id, { visible: !p.visible });
+      toast(p.visible ? 'تم الإخفاء' : 'تم الإظهار');
+      render();
+    }));
+    $$('[data-move-up]').forEach(b => b.addEventListener('click', () => {
+      DataStore.moveProductUp(b.dataset.moveUp);
+      render();
+    }));
+    $$('[data-move-down]').forEach(b => b.addEventListener('click', () => {
+      DataStore.moveProductDown(b.dataset.moveDown);
+      render();
+    }));
+  }
+
+  function toggleStockField() {
+    const isLimited = $('#fProdStatus').value === 'limited';
+    $('#stockField').style.display = isLimited ? '' : 'none';
+  }
+
+  function openModal(id) {
+    editingId = id || null;
+    refreshCatOptions();
+    if (id) {
+      const p = DataStore.getProduct(id);
+      $('#prodModalTitle').textContent = 'تعديل منتج';
+      $('#fProdName').value = p.name;
+      $('#fProdDesc').value = p.description || '';
+      $('#fProdCat').value = p.category;
+      $('#fProdPrice').value = p.priceUSD;
+      $('#fProdStatus').value = p.status || 'available';
+      $('#fProdStock').value = p.stock || 0;
+      $('#fProdVisible').checked = p.visible !== false;
+      imgUploader = ImageUpload.mount('#fProdImg', { initialValue: p.image || '' });
+    } else {
+      $('#prodModalTitle').textContent = 'إضافة منتج';
+      $('#fProdName').value = '';
+      $('#fProdDesc').value = '';
+      $('#fProdCat').value = (DataStore.getCategories(true)[0] || {}).id || '';
+      $('#fProdPrice').value = '';
+      $('#fProdStatus').value = 'available';
+      $('#fProdStock').value = 0;
+      $('#fProdVisible').checked = true;
+      imgUploader = ImageUpload.mount('#fProdImg', { initialValue: '' });
+    }
+    toggleStockField();
+    $('#prodModal').classList.add('open');
+    setTimeout(() => $('#fProdName').focus(), 100);
+  }
+  function closeModal() { $('#prodModal').classList.remove('open'); }
+
+  function saveProduct() {
+    const name = $('#fProdName').value.trim();
+    const description = $('#fProdDesc').value.trim();
+    const category = $('#fProdCat').value;
+    const priceUSD = parseFloat($('#fProdPrice').value);
+    const status = $('#fProdStatus').value;
+    const stock = status === 'limited' ? Math.max(0, parseInt($('#fProdStock').value, 10) || 0) : 0;
+    const visible = $('#fProdVisible').checked;
+    const image = imgUploader ? imgUploader.getValue() : '';
+
+    if (!name) { toast('أدخل اسم المنتج', 'error'); return; }
+    if (!category) { toast('اختر القسم', 'error'); return; }
+    if (isNaN(priceUSD) || priceUSD < 0) { toast('السعر غير صحيح', 'error'); return; }
+    if (status === 'limited' && stock < 0) { toast('الكمية غير صحيحة', 'error'); return; }
+
+    const data = { name, description, category, priceUSD, image, status, stock, visible };
+
+    if (editingId) {
+      DataStore.updateProduct(editingId, data);
+      toast('تم التعديل بنجاح', 'success');
+    } else {
+      DataStore.addProduct(data);
+      toast('تمت الإضافة بنجاح', 'success');
+    }
+    closeModal();
+    render();
+  }
+
+  function deleteProduct(id) {
+    const p = DataStore.getProduct(id);
+    if (!p) return;
+    if (!confirm(`حذف المنتج "${p.name}"؟`)) return;
+    DataStore.deleteProduct(id);
+    toast('تم الحذف', 'success');
+    render();
+  }
+
+  $('#addProdBtn').addEventListener('click', () => openModal(null));
+  $('#saveProdBtn').addEventListener('click', saveProduct);
+  $('#fProdStatus').addEventListener('change', toggleStockField);
+  $$('[data-modal-close]').forEach(b => b.addEventListener('click', closeModal));
+  $('#prodModal').addEventListener('click', (e) => {
+    if (e.target === $('#prodModal')) closeModal();
+  });
+
+  $('#filterCat').addEventListener('change', (e) => {
+    state.catFilter = e.target.value;
+    render();
+  });
+  $('#searchProd').addEventListener('input', (e) => {
+    state.search = e.target.value;
+    render();
+  });
+
+  refreshCatOptions();
+  render();
+})();
+</script>
+</body>
+</html>

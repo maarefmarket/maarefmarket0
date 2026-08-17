@@ -1,0 +1,42 @@
+# ================================================
+# إعدادات النشر على Netlify
+# ================================================
+
+[build]
+  publish = "."
+
+# ==== الأمان والأداء ====
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# ==== ملف البيانات: لا يُخزَّن مؤقتًا ليتحدث فورًا ====
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ==== صفحات HTML: لا تُخزَّن مؤقتًا ====
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ==== الأصول: cache طويل ====
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>السلة · CampusKart</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-wrap">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.svg" alt="CampusKart" class="brand-logo">
+        <div class="brand-titles">
+          <span class="brand-name" data-brand-name>CampusKart</span>
+          <span class="brand-sub" data-brand-sub>متجر الجامعة</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" data-theme-toggle aria-label="تبديل الوضع"></button>
+        <a href="cart.html" class="icon-btn cart-btn" aria-label="السلة">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-badge hidden" data-cart-badge>0</span>
+        </a>
+        <button class="icon-btn menu-btn" data-menu-toggle aria-label="القائمة">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">الرئيسية</a>
+    <span class="sep">/</span>
+    <span>السلة</span>
+  </div>
+
+  <section class="section">
+    <h1 class="page-title">سلة المشتريات</h1>
+    <p class="page-desc">راجع منتجاتك ثم أرسل الطلب عبر واتساب.</p>
+  </section>
+
+  <div class="cart-layout">
+    <div class="cart-items-box" id="cartItemsBox">
+      <div class="loader"><div class="spinner"></div></div>
+    </div>
+    <div class="cart-summary-box" id="cartSummaryBox" style="display:none">
+      <h3 class="summary-title">ملخّص الطلب</h3>
+      <div class="totals" id="totalsBox"></div>
+
+      <div class="note-area">
+        <label for="orderNote">ملاحظة على الطلب (اختيارية)</label>
+        <textarea id="orderNote" placeholder="مثال: التوصيل بعد الساعة 3م، وقت المحاضرة..."></textarea>
+        <div class="note-hint">💡 الرسالة ستُجهَّز في واتساب — لن تُرسل تلقائيًا، تستطيع تعديلها قبل الإرسال.</div>
+      </div>
+
+      <button class="btn btn-wa btn-block btn-lg" id="checkoutBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.61 4.06 1.66 5.7L2 22l4.55-1.19a9.86 9.86 0 0 0 5.49 1.65c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.71 14.02c-.24.68-1.4 1.29-1.94 1.32-.54.03-1.13.05-1.82-.11-.42-.09-.96-.28-1.66-.58-2.92-1.26-4.82-4.2-4.97-4.4-.15-.2-1.19-1.58-1.19-3.02s.75-2.14 1.02-2.43c.27-.29.59-.36.79-.36l.57.01c.18.01.43-.07.67.51.24.59.83 2.03.9 2.17.07.15.12.32.02.51-.09.2-.14.32-.28.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.61.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.29 2.33 1.44.29.15.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.65-.15.27.09 1.71.81 2 .96.29.15.48.22.55.34.07.12.07.69-.17 1.36Z"/>
+        </svg>
+        إرسال الطلب عبر واتساب
+      </button>
+
+      <div style="margin-top:12px; display:flex; gap:8px">
+        <a href="products.html" class="btn btn-block">متابعة التسوق</a>
+        <button class="btn btn-danger" id="clearCartBtn" style="min-width:44px" aria-label="إفراغ السلة">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 128 128" fill="none">
+            <path d="M22 44 L36 44 L36 34 C36 20 48 12 64 12 C80 12 92 20 92 34 L92 44 L106 44 C110 44 113 47 113 51 L110 112 C109.6 116 106 119 102 119 L26 119 C22 119 18.4 116 18 112 L15 51 C15 47 18 44 22 44 Z" fill="#C9A46A"/>
+          </svg>
+          <div>
+            <div class="footer-brand-text" data-brand-name>CampusKart</div>
+            <div class="footer-brand-sub" data-brand-sub>متجر الجامعة</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الموقع</h4>
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="products.html">المنتجات</a></li>
+          <li><a href="cart.html">السلة</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 <span data-brand-name>CampusKart</span> — جميع الحقوق محفوظة.</div>
+  </footer>
+
+  <script src="js/data-store.js"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/shop.js"></script>
+  <script>
+    (async function() {
+      await DataStore.load();
+      Cart.load();
+      Cart.purgeInvalidLines();
+      UI.init();
+      const $ = UI.$;
+      const $$ = UI.$$;
+      const escape = UI.escapeHtml;
+
+      function renderItems() {
+        const items = Cart.getItems();
+        const box = $('#cartItemsBox');
+        const summary = $('#cartSummaryBox');
+
+        if (!items.length) {
+          summary.style.display = 'none';
+          box.innerHTML = `
+            <div class="cart-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              <h3>سلتك فارغة</h3>
+              <p>ابدأ بإضافة منتجات من قائمة المنتجات.</p>
+              <a href="products.html" class="btn btn-primary" style="margin-top:12px">تصفّح المنتجات</a>
+            </div>`;
+          return;
+        }
+
+        summary.style.display = 'block';
+        box.innerHTML = items.map(line => {
+          const p = DataStore.getProduct(line.id);
+          if (!p) return '';
+          const cat = DataStore.getCategory(p.category);
+          const icon = (cat && cat.icon) || '📦';
+          const sym = Currency.getSymbol('USD');
+          const lineTotal = p.priceUSD * line.qty;
+          const maxQty = DataStore.getMaxQtyForProduct(p.id);
+          const canInc = line.qty < maxQty && DataStore.isProductAvailable(p.id);
+          return `
+            <div class="cart-item">
+              <div class="ci-img">${p.image
+                ? `<img src="${escape(p.image)}" alt="" onerror="this.onerror=null;this.style.display='none';this.parentNode.textContent='${escape(icon)}'">`
+                : escape(icon)
+              }</div>
+              <div class="ci-body">
+                <h4 class="ci-name">${escape(p.name)}</h4>
+                <div class="ci-price">${Currency.format(p.priceUSD, 'USD')}${sym} × ${line.qty} = <b>${Currency.format(lineTotal, 'USD')}${sym}</b></div>
+              </div>
+              <div class="ci-actions">
+                <div class="qty-ctl">
+                  <button data-inc="${escape(p.id)}" ${canInc ? '' : 'disabled'} aria-label="زيادة">+</button>
+                  <span>${line.qty}</span>
+                  <button data-dec="${escape(p.id)}" aria-label="نقص">−</button>
+                </div>
+                <button class="ci-remove" data-rm="${escape(p.id)}" aria-label="حذف">×</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        $$('[data-inc]', box).forEach(b => b.addEventListener('click', () => {
+          const id = b.getAttribute('data-inc');
+          const r = Cart.increment(id);
+          if (!r.success && r.reason === 'max_reached') {
+            UI.toast(`وصلت إلى الحد الأقصى (${r.max})`, 'warn');
+          }
+        }));
+        $$('[data-dec]', box).forEach(b => b.addEventListener('click', () => {
+          Cart.decrement(b.getAttribute('data-dec'));
+        }));
+        $$('[data-rm]', box).forEach(b => b.addEventListener('click', () => {
+          Cart.remove(b.getAttribute('data-rm'));
+          UI.toast('تمت الإزالة من السلة');
+        }));
+
+        renderTotals();
+      }
+
+      function renderTotals() {
+        const totalsHtml = ['TRY', 'SYP', 'USD'].map(cur => {
+          const val = Cart.total(cur);
+          const label = Currency.getLabel(cur);
+          const formatted = Currency.format(val, cur) + ' ' + Currency.getSymbol(cur);
+          const cls = cur === 'USD' ? 'main' : '';
+          return `<div class="total-row ${cls}"><span>${label}</span><span class="amount">${formatted}</span></div>`;
+        }).join('');
+        $('#totalsBox').innerHTML = totalsHtml;
+      }
+
+      // اشترك بتغييرات السلة
+      Cart.onChange(renderItems);
+      window.addEventListener('ck-cart-changed', renderItems);
+      renderItems();
+
+      $('#checkoutBtn').addEventListener('click', () => {
+        const note = $('#orderNote').value;
+        const result = WhatsAppOrder.checkout(note);
+        if (!result.success) {
+          if (result.reason === 'empty') UI.toast('السلة فارغة', 'error');
+          else if (result.reason === 'no_number') UI.toast('رقم الواتساب غير محدد', 'error');
+        }
+      });
+
+      $('#clearCartBtn').addEventListener('click', () => {
+        if (Cart.countTotal() === 0) return;
+        if (confirm('هل أنت متأكد من إفراغ السلة؟')) {
+          Cart.clear();
+          UI.toast('تم إفراغ السلة');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

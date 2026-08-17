@@ -1,0 +1,9 @@
+# إعادة توجيه Netlify
+
+# رابط مختصر للوحة التحكم
+/admin           /admin/index.html     200
+/admin/          /admin/index.html     200
+
+# صفحات نظيفة (بدون امتداد .html)
+/products        /products.html        200
+/cart            /cart.html            200

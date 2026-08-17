@@ -1,0 +1,74 @@
+{
+  "settings": {
+    "storeName": "CampusKart",
+    "storeSubtitle": "متجر الجامعة",
+    "slogan": "كل ما تحتاجه في مكان واحد",
+    "description": "من مستلزمات الدراسة إلى الوجبات والمشروبات — كل شيء يصلك داخل الحرم الجامعي.",
+    "whatsappNumber": "905000000000",
+    "adminPassword": "admin",
+    "rates": { "USD": 1, "TRY": 33, "SYP": 14000 },
+    "currencyLabels": {
+      "USD": "دولار أمريكي",
+      "TRY": "ليرة تركية",
+      "SYP": "ليرة سورية"
+    },
+    "currencySymbols": {
+      "USD": "$",
+      "TRY": "₺",
+      "SYP": "ل.س"
+    },
+    "messageTemplate": {
+      "greeting": "السلام عليكم ورحمة الله وبركاته",
+      "intro": "أريد شراء هذه الأشياء:",
+      "totalsLabel": "السعر النهائي الإجمالي:",
+      "noteLabel": "ملاحظة:"
+    },
+    "features": [
+      { "icon": "star",    "text": "منتجات مختارة بعناية" },
+      { "icon": "shield",  "text": "جودة عالية وسعر مناسب" },
+      { "icon": "truck",   "text": "توصيل داخل الحرم الجامعي" },
+      { "icon": "headset", "text": "خدمة عملاء سريعة" }
+    ],
+    "hero": {
+      "enabled": true,
+      "title": "كل ما تحتاجه",
+      "titleAccent": "في مكان واحد",
+      "subtitle": "من مستلزمات الدراسة إلى الوجبات والمشروبات — تسوّق واستلم داخل الحرم الجامعي.",
+      "buttonText": "تسوّق الآن",
+      "buttonLink": "products.html",
+      "buttonVisible": true,
+      "image": "",
+      "imageVisible": true,
+      "titleVisible": true,
+      "subtitleVisible": true
+    }
+  },
+  "categories": [
+    { "id": "chips",      "name": "الشيبسات",         "icon": "🍟", "image": "", "visible": true, "order": 1 },
+    { "id": "drinks",     "name": "المشروبات",        "icon": "🥤", "image": "", "visible": true, "order": 2 },
+    { "id": "biscuits",   "name": "البسكوت",          "icon": "🍪", "image": "", "visible": true, "order": 3 },
+    { "id": "canned",     "name": "المعلبات",         "icon": "🥫", "image": "", "visible": true, "order": 4 },
+    { "id": "frozen",     "name": "المثلجات",         "icon": "🍦", "image": "", "visible": true, "order": 5 },
+    { "id": "salty",      "name": "الموالح",          "icon": "🥜", "image": "", "visible": true, "order": 6 },
+    { "id": "stationery", "name": "الأدوات المدرسية", "icon": "✏️", "image": "", "visible": true, "order": 7 }
+  ],
+  "products": [
+    { "id": "p1",  "category": "chips",      "name": "شيبس ليز بالجبنة",       "priceUSD": 0.50, "image": "", "description": "شيبس مقرمش بنكهة الجبنة الطبيعية، عبوة 40غ.",              "status": "available",  "stock": 0, "visible": true, "order": 1 },
+    { "id": "p2",  "category": "chips",      "name": "شيبس دوريتوس",          "priceUSD": 0.75, "image": "", "description": "شيبس ذرة بنكهة الفلفل الحار، ممتاز مع المشروبات الغازية.",   "status": "available",  "stock": 0, "visible": true, "order": 2 },
+    { "id": "p3",  "category": "chips",      "name": "شيبس برينجلز",           "priceUSD": 1.50, "image": "", "description": "شيبس بطاطا مقرمش بنكهة كلاسيكية، عبوة أسطوانية سهلة الحمل.", "status": "limited",    "stock": 5, "visible": true, "order": 3 },
+    { "id": "p4",  "category": "drinks",     "name": "بيبسي 330 مل",           "priceUSD": 0.60, "image": "", "description": "مشروب غازي منعش بحجم 330 مل، مبرد وجاهز.",                   "status": "available",  "stock": 0, "visible": true, "order": 4 },
+    { "id": "p5",  "category": "drinks",     "name": "ماء معدني 500 مل",       "priceUSD": 0.30, "image": "", "description": "مياه معدنية نقية بحجم 500 مل.",                              "status": "available",  "stock": 0, "visible": true, "order": 5 },
+    { "id": "p6",  "category": "drinks",     "name": "عصير برتقال طازج",       "priceUSD": 0.90, "image": "", "description": "عصير برتقال طبيعي 100%، غني بفيتامين C.",                    "status": "unavailable","stock": 0, "visible": true, "order": 6 },
+    { "id": "p7",  "category": "biscuits",   "name": "بسكوت شوكولاتة",         "priceUSD": 0.40, "image": "", "description": "بسكوت مقرمش محشو بالشوكولاتة، عبوة صغيرة مناسبة للاستراحة.", "status": "available",  "stock": 0, "visible": true, "order": 7 },
+    { "id": "p8",  "category": "biscuits",   "name": "بسكوت ويفر",             "priceUSD": 0.50, "image": "", "description": "طبقات ويفر بحشوة الشوكولاتة الكريمية، خفيف ولذيذ.",         "status": "available",  "stock": 0, "visible": true, "order": 8 },
+    { "id": "p9",  "category": "canned",     "name": "تونة بالزيت",             "priceUSD": 1.80, "image": "", "description": "تونة عالية الجودة معلبة بزيت الزيتون، وجبة سريعة ومغذية.",  "status": "available",  "stock": 0, "visible": true, "order": 9 },
+    { "id": "p10", "category": "canned",     "name": "ذرة معلبة",               "priceUSD": 1.20, "image": "", "description": "حبات ذرة صفراء حلوة معلبة، جاهزة للاستخدام في السلطات.",   "status": "available",  "stock": 0, "visible": true, "order": 10 },
+    { "id": "p11", "category": "frozen",     "name": "آيس كريم فانيلا",         "priceUSD": 1.00, "image": "", "description": "آيس كريم كريمي بنكهة الفانيلا الطبيعية.",                   "status": "limited",    "stock": 3, "visible": true, "order": 11 },
+    { "id": "p12", "category": "frozen",     "name": "بوظة عربية",              "priceUSD": 0.80, "image": "", "description": "بوظة عربية تقليدية بنكهات متعددة.",                          "status": "available",  "stock": 0, "visible": true, "order": 12 },
+    { "id": "p13", "category": "salty",      "name": "فستق حلبي",              "priceUSD": 3.50, "image": "", "description": "فستق حلبي محمص ومملح، جودة ممتازة.",                        "status": "available",  "stock": 0, "visible": true, "order": 13 },
+    { "id": "p14", "category": "salty",      "name": "بذر عبّاد الشمس",         "priceUSD": 1.00, "image": "", "description": "بذر عباد الشمس محمص ومملح، ممتاز للتسلية.",                 "status": "available",  "stock": 0, "visible": true, "order": 14 },
+    { "id": "p15", "category": "stationery", "name": "دفتر جامعي 100 ورقة",    "priceUSD": 2.00, "image": "", "description": "دفتر مسطر 100 ورقة، غلاف صلب، مقاس A4.",                    "status": "available",  "stock": 0, "visible": true, "order": 15 },
+    { "id": "p16", "category": "stationery", "name": "مجموعة أقلام (5)",        "priceUSD": 1.50, "image": "", "description": "5 أقلام حبر جاف بألوان متنوعة (أزرق، أسود، أحمر).",         "status": "available",  "stock": 0, "visible": true, "order": 16 },
+    { "id": "p17", "category": "stationery", "name": "آلة حاسبة علمية",         "priceUSD": 8.00, "image": "", "description": "آلة حاسبة علمية بجميع الدوال الرياضية والإحصائية.",         "status": "limited",    "stock": 2, "visible": true, "order": 17 }
+  ]
+}

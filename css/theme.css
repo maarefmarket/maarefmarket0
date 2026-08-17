@@ -1,0 +1,120 @@
+/* ================================================
+   CampusKart — متغيرات الهوية البصرية
+   الألوان مأخوذة من صورة الهوية البصرية:
+   #0F3D2E (أخضر غابي)
+   #C9A46A (ذهبي)
+   #F5F7F6 (أوف-وايت)
+   #1E1E1E (فحمي)
+   ================================================ */
+
+:root {
+  /* الألوان الأساسية */
+  --green: #0F3D2E;
+  --green-2: #175A44;
+  --green-3: #1c6a4f;
+  --gold: #C9A46A;
+  --gold-2: #B58E52;
+  --gold-3: #A67A3E;
+
+  /* خلفيات ونصوص - الوضع النهاري */
+  --bg: #F5F7F6;
+  --bg-2: #EEF2EF;
+  --card: #FFFFFF;
+  --ink: #1E1E1E;
+  --ink-2: #333333;
+  --muted: #6B7570;
+  --muted-2: #8A928D;
+  --border: #E6E9E7;
+  --border-2: #D5DAD7;
+
+  /* ألوان الحالة */
+  --success: #2E7D32;
+  --danger: #C62828;
+  --warning: #E65100;
+  --wa-green: #25D366;
+  --wa-green-2: #1FBC5B;
+
+  /* الظلال */
+  --shadow-sm: 0 2px 8px rgba(15, 61, 46, 0.06);
+  --shadow: 0 6px 18px rgba(15, 61, 46, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 61, 46, 0.12);
+
+  /* المقاييس */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* الخطوط */
+  --font-primary: 'Tajawal', 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Cairo', 'Tajawal', system-ui, sans-serif;
+
+  /* الأحجام */
+  --header-h: 72px;
+  --container: 1200px;
+
+  /* الحركات */
+  --t-fast: 0.15s ease;
+  --t-med: 0.25s ease;
+  --t-slow: 0.4s ease;
+}
+
+/* ================================================
+   الوضع الليلي — يحافظ على نفس الهوية البصرية
+   بألوان مكيّفة (الذهبي يبرز في الظلام)
+   ================================================ */
+html[data-theme="dark"] {
+  --green: #1c6a4f;
+  --green-2: #175A44;
+  --green-3: #0F3D2E;
+  --gold: #D9B57A;
+  --gold-2: #C9A46A;
+  --gold-3: #B58E52;
+
+  --bg: #0D1613;
+  --bg-2: #0A1210;
+  --card: #151F1B;
+  --ink: #F5F7F6;
+  --ink-2: #DDE3E0;
+  --muted: #9AA8A2;
+  --muted-2: #7C8983;
+  --border: #243029;
+  --border-2: #2F3D35;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* إعادة تعيين أساسية */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-primary);
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background var(--t-med), color var(--t-med);
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+input, select, textarea {
+  font-family: inherit;
+  color: var(--ink);
+}
+
+/* تحديد النص */
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* شريط التمرير */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }

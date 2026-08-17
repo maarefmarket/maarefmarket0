@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات · لوحة التحكم CampusKart</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-body">
+  <div class="admin-mask" id="adminMask"></div>
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <img src="../assets/logo.svg" alt="CampusKart">
+      <div>
+        <div class="b-name" data-brand-name>CampusKart</div>
+        <div class="b-sub">لوحة التحكم</div>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>الرئيسية</a>
+      <a href="hero.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>اللوحة العلوية</a>
+      <a href="categories.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>الأقسام</a>
+      <a href="products.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>المنتجات</a>
+      <a href="rates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>أسعار الصرف</a>
+      <a href="message.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>رسالة واتساب</a>
+      <a href="settings.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>الإعدادات</a>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <button class="btn" data-theme-toggle></button>
+      <a class="btn" href="../index.html">🛍️</a>
+      <button class="btn btn-danger" id="logoutBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" style="margin-bottom:12px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="admin-topbar">
+      <h1>إعدادات المتجر</h1>
+      <div class="actions">
+        <button class="btn" data-download-json>📥 تنزيل JSON</button>
+      </div>
+    </div>
+
+    <!-- إعدادات المتجر العامة -->
+    <div class="panel">
+      <h2 class="panel-title">إعدادات المتجر العامة</h2>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label for="setName">اسم المتجر (English)</label>
+          <input type="text" id="setName" placeholder="CampusKart">
+        </div>
+        <div class="form-field">
+          <label for="setSub">الاسم الفرعي (Arabic)</label>
+          <input type="text" id="setSub" placeholder="متجر الجامعة">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="setSlogan">الشعار الرئيسي</label>
+        <input type="text" id="setSlogan" placeholder="كل ما تحتاجه في مكان واحد">
+      </div>
+      <div class="form-field">
+        <label for="setDesc">الوصف (يظهر تحت الشعار)</label>
+        <textarea id="setDesc" rows="3" placeholder="وصف قصير عن المتجر..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg" id="saveGeneralBtn">💾 حفظ الإعدادات العامة</button>
+    </div>
+
+    <!-- كلمة المرور -->
+    <div class="panel">
+      <h2 class="panel-title">كلمة مرور لوحة التحكم</h2>
+      <p class="panel-desc">غيّر كلمة المرور المستخدمة للدخول إلى لوحة التحكم. سيتم تسجيل خروجك بعد التغيير.</p>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label for="newPw">كلمة المرور الجديدة</label>
+          <input type="password" id="newPw" placeholder="كلمة المرور الجديدة">
+        </div>
+        <div class="form-field">
+          <label for="confirmPw">تأكيد كلمة المرور</label>
+          <input type="password" id="confirmPw" placeholder="أعد كتابة كلمة المرور">
+        </div>
+      </div>
+      <button class="btn btn-gold" id="savePwBtn">🔒 تحديث كلمة المرور</button>
+    </div>
+
+    <!-- شريط المميزات -->
+    <div class="panel">
+      <h2 class="panel-title">شريط المميزات (أسفل الصفحة الرئيسية)</h2>
+      <p class="panel-desc">المميزات الأربع التي تظهر في الشريط الأخضر بأسفل الموقع.</p>
+      <div id="featuresList"></div>
+      <button class="btn" id="addFeatureBtn" style="margin-top:8px">+ إضافة ميزة</button>
+      <div style="margin-top:14px">
+        <button class="btn btn-primary" id="saveFeaturesBtn">💾 حفظ المميزات</button>
+      </div>
+    </div>
+
+    <!-- إدارة البيانات -->
+    <div class="panel">
+      <h2 class="panel-title">إدارة البيانات (Netlify + GitHub)</h2>
+      <p class="panel-desc">
+        الموقع يقرأ بياناته من ملف <code>data/store.json</code> في مستودع GitHub. عند تعديل أي شيء من هنا:
+        <br>1. اضغط <b>«تنزيل store.json»</b> لتنزيل الملف الجديد.
+        <br>2. ارفعه إلى مستودع GitHub الخاص بموقعك (استبدل الملف القديم في مجلد <code>data/</code>).
+        <br>3. سيقوم Netlify بإعادة نشر الموقع تلقائيًا خلال ثوانٍ.
+      </p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn btn-primary" data-download-json>📥 تنزيل store.json</button>
+        <button class="btn btn-gold" data-copy-json>📋 نسخ محتوى JSON</button>
+        <button class="btn" id="importJsonBtn">📤 استيراد JSON</button>
+        <input type="file" id="importJsonInput" accept=".json,application/json" style="display:none">
+        <button class="btn btn-danger" id="resetBtn">↺ إعادة تعيين للافتراضي</button>
+      </div>
+    </div>
+
+    <!-- معاينة JSON -->
+    <div class="panel">
+      <h2 class="panel-title">معاينة JSON الحالي</h2>
+      <pre class="preview-box" id="jsonPreview" style="max-height:400px;overflow:auto;font-size:12px"></pre>
+    </div>
+  </main>
+</div>
+
+<script src="../js/data-store.js"></script>
+<script src="../js/currency.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+(async function() {
+  const ok = await Admin.init();
+  if (!ok) return;
+  const { $, $$, escapeHtml, toast } = UI;
+
+  const FEATURE_ICONS = [
+    { value: 'star', label: '⭐ نجمة' },
+    { value: 'shield', label: '🛡️ درع' },
+    { value: 'truck', label: '🚚 شاحنة' },
+    { value: 'headset', label: '🎧 سماعة' }
+  ];
+
+  function loadGeneral() {
+    const s = DataStore.getSettings();
+    $('#setName').value = s.storeName || '';
+    $('#setSub').value = s.storeSubtitle || '';
+    $('#setSlogan').value = s.slogan || '';
+    $('#setDesc').value = s.description || '';
+  }
+
+  function renderFeatures() {
+    const s = DataStore.getSettings();
+    const features = s.features || [];
+    const wrap = $('#featuresList');
+    if (!features.length) {
+      wrap.innerHTML = '<div class="empty-state" style="padding:20px">لا توجد مميزات. اضغط "إضافة ميزة" لبدء الإضافة.</div>';
+      return;
+    }
+    wrap.innerHTML = features.map((f, i) => `
+      <div class="form-row" style="align-items:end;background:var(--bg);padding:12px;border-radius:var(--radius);margin-bottom:8px;border:1px solid var(--border)">
+        <div class="form-field" style="margin:0">
+          <label>الأيقونة</label>
+          <select data-f-icon="${i}">
+            ${FEATURE_ICONS.map(opt => `<option value="${opt.value}" ${f.icon === opt.value ? 'selected' : ''}>${opt.label}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-field" style="margin:0">
+          <label>النص</label>
+          <input type="text" data-f-text="${i}" value="${escapeHtml(f.text || '')}">
+        </div>
+        <div>
+          <button class="btn btn-danger" data-f-del="${i}">حذف</button>
+        </div>
+      </div>
+    `).join('');
+
+    $$('[data-f-icon]').forEach(el => el.addEventListener('change', (e) => {
+      const idx = +el.dataset.fIcon;
+      const s = DataStore.getSettings();
+      s.features[idx].icon = e.target.value;
+      DataStore.save();
+    }));
+    $$('[data-f-text]').forEach(el => el.addEventListener('input', (e) => {
+      const idx = +el.dataset.fText;
+      const s = DataStore.getSettings();
+      s.features[idx].text = e.target.value;
+      DataStore.save();
+    }));
+    $$('[data-f-del]').forEach(el => el.addEventListener('click', () => {
+      const idx = +el.dataset.fDel;
+      const s = DataStore.getSettings();
+      s.features.splice(idx, 1);
+      DataStore.save();
+      renderFeatures();
+      toast('تم الحذف');
+    }));
+  }
+
+  function updatePreview() {
+    $('#jsonPreview').textContent = DataStore.exportJson();
+  }
+
+  function saveGeneral() {
+    const patch = {
+      storeName: $('#setName').value.trim() || 'CampusKart',
+      storeSubtitle: $('#setSub').value.trim(),
+      slogan: $('#setSlogan').value.trim(),
+      description: $('#setDesc').value.trim()
+    };
+    DataStore.updateSettings(patch);
+    UI.updateBrand();
+    toast('تم حفظ الإعدادات العامة بنجاح', 'success');
+    updatePreview();
+  }
+
+  function savePassword() {
+    const pw = $('#newPw').value.trim();
+    const confirm2 = $('#confirmPw').value.trim();
+    if (!pw) { toast('أدخل كلمة المرور الجديدة', 'error'); return; }
+    if (pw.length < 3) { toast('كلمة المرور قصيرة جدًا', 'error'); return; }
+    if (pw !== confirm2) { toast('كلمتا المرور غير متطابقتين', 'error'); return; }
+    DataStore.updatePassword(pw);
+    $('#newPw').value = '';
+    $('#confirmPw').value = '';
+    toast('تم تحديث كلمة المرور. سيتم تسجيل خروجك...', 'success');
+    setTimeout(() => {
+      DataStore.logoutAdmin();
+      location.href = 'index.html';
+    }, 1500);
+  }
+
+  function saveFeatures() {
+    // تم حفظها تلقائيًا عند التعديل، هذا الزر فقط لإعلام المستخدم
+    toast('تم حفظ المميزات بنجاح', 'success');
+    updatePreview();
+  }
+
+  function addFeature() {
+    const s = DataStore.getSettings();
+    if (!s.features) s.features = [];
+    s.features.push({ icon: 'star', text: 'ميزة جديدة' });
+    DataStore.save();
+    renderFeatures();
+  }
+
+  function resetData() {
+    if (!confirm('هل أنت متأكد من إعادة تعيين البيانات إلى الافتراضية؟ سيتم فقدان جميع التعديلات المحلية.')) return;
+    DataStore.resetToDefault();
+    toast('تمت إعادة التعيين، سيتم إعادة تحميل الصفحة...', 'success');
+    setTimeout(() => location.reload(), 1000);
+  }
+
+  function importFile(file) {
+    if (!file) return;
+    Admin.importJsonFile(file);
+  }
+
+  $('#saveGeneralBtn').addEventListener('click', saveGeneral);
+  $('#savePwBtn').addEventListener('click', savePassword);
+  $('#saveFeaturesBtn').addEventListener('click', saveFeatures);
+  $('#addFeatureBtn').addEventListener('click', addFeature);
+  $('#resetBtn').addEventListener('click', resetData);
+  $('#importJsonBtn').addEventListener('click', () => $('#importJsonInput').click());
+  $('#importJsonInput').addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) importFile(e.target.files[0]);
+  });
+
+  loadGeneral();
+  renderFeatures();
+  updatePreview();
+})();
+</script>
+</body>
+</html>
