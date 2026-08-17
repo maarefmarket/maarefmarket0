@@ -13,48 +13,123 @@ const ImageUpload = (function() {
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
   // تحويل ملف صورة إلى Data URL مضغوط
-  function readFileAsDataURL(file) {
-    return new Promise((resolve, reject) => {
-      if (!file) return reject(new Error('لا يوجد ملف'));
-      if (!file.type.startsWith('image/')) return reject(new Error('الملف ليس صورة'));
-      if (file.size > MAX_FILE_SIZE) return reject(new Error('حجم الصورة كبير جدًا (الحد الأقصى 5MB)'));
-
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error('فشل قراءة الملف'));
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onerror = () => reject(new Error('فشل تحميل الصورة'));
-        img.onload = () => {
-          try {
-            // تصغير حسب الحد الأقصى
-            let { width, height } = img;
-            if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-              const ratio = Math.min(MAX_WIDTH / width, MAX_HEIGHT / height);
-              width = Math.round(width * ratio);
-              height = Math.round(height * ratio);
-            }
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-
-            // اختر jpeg للحجم الأصغر (إلا إذا كانت PNG أصلًا وتريد الشفافية)
-            let mime = 'image/jpeg';
-            if (file.type === 'image/png' || file.type === 'image/webp') {
-              mime = file.type;
-            }
-            const dataUrl = canvas.toDataURL(mime, QUALITY);
-            resolve(dataUrl);
-          } catch (err) {
-            reject(err);
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
+async function readFileAsDataURL(file) {
+  if (!file) {
+    throw new Error('لا يوجد ملف');
   }
+
+  if (!file.type.startsWith('image/')) {
+    throw new Error('الملف ليس صورة');
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    throw new Error('حجم الصورة كبير جدًا (الحد الأقصى 5MB)');
+  }
+
+  // أولاً: تصغير وضغط الصورة
+  const blob = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onerror = () => reject(
+      new Error('فشل قراءة الملف')
+    );
+
+    reader.onload = (e) => {
+      const img = new Image();
+
+      img.onerror = () => reject(
+        new Error('فشل تحميل الصورة')
+      );
+
+      img.onload = () => {
+        try {
+          let { width, height } = img;
+
+          if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+            const ratio = Math.min(
+              MAX_WIDTH / width,
+              MAX_HEIGHT / height
+            );
+
+            width = Math.round(width * ratio);
+            height = Math.round(height * ratio);
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          let mime = 'image/jpeg';
+
+          if (
+            file.type === 'image/png' ||
+            file.type === 'image/webp'
+          ) {
+            mime = file.type;
+          }
+
+          canvas.toBlob(
+            (result) => {
+              if (result) resolve(result);
+              else reject(new Error('فشل تجهيز الصورة'));
+            },
+            mime,
+            QUALITY
+          );
+
+        } catch (err) {
+          reject(err);
+        }
+      };
+
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+  // توكن الأدمن الذي حفظناه عند تسجيل الدخول
+  const token = sessionStorage.getItem(
+    'ck_admin_password'
+  );
+
+  if (!token) {
+    throw new Error(
+      'انتهت جلسة الإدارة. سجّل الدخول من جديد.'
+    );
+  }
+
+  // رفع الصورة إلى Netlify Blobs
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    headers: {
+      'Content-Type': blob.type || 'image/jpeg',
+      'Authorization': 'Bearer ' + token,
+      'X-Filename': file.name || 'image'
+    },
+    body: blob
+  });
+
+  let result;
+
+  try {
+    result = await response.json();
+  } catch (_) {
+    throw new Error('استجابة غير صالحة من الخادم');
+  }
+
+  if (!response.ok || !result.ok) {
+    throw new Error(
+      result.error || 'تعذر رفع الصورة'
+    );
+  }
+
+  // بدل Base64 نرجع رابط الصورة العام
+  return result.url;
+}
 
   /**
    * تركيب مكوّن رفع صورة كامل في عنصر معين
