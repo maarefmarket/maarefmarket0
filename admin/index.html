@@ -48,22 +48,52 @@
       const pwInput = document.getElementById('pw');
       const btn = document.getElementById('loginBtn');
 
-      function tryLogin() {
-        const pw = pwInput.value.trim();
-        if (!pw) {
-          UI.toast('أدخل كلمة المرور', 'error');
-          return;
-        }
-        if (DataStore.checkPassword(pw)) {
-          DataStore.loginAdmin();
-          UI.toast('مرحبًا بك!', 'success');
-          setTimeout(() => { location.href = 'dashboard.html'; }, 400);
-        } else {
-          UI.toast('كلمة مرور خاطئة', 'error');
-          pwInput.value = '';
-          pwInput.focus();
-        }
-      }
+async function tryLogin() {
+  const pw = pwInput.value.trim();
+
+  if (!pw) {
+    UI.toast('أدخل كلمة المرور', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'جاري التحقق...';
+
+  try {
+    const res = await fetch('/api/data', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + pw
+      },
+      body: JSON.stringify(DataStore.get())
+    });
+
+    if (res.ok) {
+      sessionStorage.setItem('ck_admin_password', pw);
+      DataStore.loginAdmin();
+      UI.toast('مرحبًا بك!', 'success');
+
+      setTimeout(() => {
+        location.href = 'dashboard.html';
+      }, 400);
+
+    } else if (res.status === 401) {
+      UI.toast('كلمة مرور خاطئة', 'error');
+      pwInput.value = '';
+      pwInput.focus();
+
+    } else {
+      UI.toast('حدث خطأ في الاتصال', 'error');
+    }
+
+  } catch (e) {
+    UI.toast('تعذر الاتصال بالخادم', 'error');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'دخول';
+}
 
       btn.addEventListener('click', tryLogin);
       pwInput.addEventListener('keyup', (e) => {
